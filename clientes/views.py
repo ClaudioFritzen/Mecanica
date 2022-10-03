@@ -1,6 +1,8 @@
+import re
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from .models import Cliente, Carro
+
 # Create your views here.
 def clientes(request):
     if request.method == "GET":
@@ -14,7 +16,23 @@ def clientes(request):
         carros = request.POST.getlist('carro')
         placas = request.POST.getlist('placa')
         anos = request.POST.getlist('ano')
-        
+
+        # fazendo a validação do cpf
+        # buscando no banco se existe o cpf em todos os clientes no db
+        cliente = Cliente.objects.filter(cpf=cpf)
+
+        # se tiver faz
+        if cliente.exists():
+           return render(request, 'clientes.html', {'nome': nome, 'sobrenome': sobrenome, 'email': email, 'carros': zip(carros, placas, anos)})
+           
+
+        # validação do email
+        if not re.fullmatch(re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'), email):
+            return render(request, {'nome': nome, 'sobrenome': sobrenome, 'cpf': cpf, 'carros': zip(carros, placas, ano)})
+           
+
+
+
         cliente = Cliente(
             nome = nome,
             sobrenome = sobrenome,
