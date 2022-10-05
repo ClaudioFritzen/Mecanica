@@ -37,8 +37,7 @@ function dados_cliente(){
     }).then(function(result){
         return result.json()
     }).then(function(data){
-        console.log(data)
-        
+                
         document.getElementById('form-att-cliente').style.display = 'block'
 
         nome = document.getElementById('nome')
@@ -52,6 +51,12 @@ function dados_cliente(){
 
         cpf = document.getElementById('cpf')
         cpf.value = data['cliente']['cpf']
+
+        // lista dos carros
+        div_carros = document.getElementById('carros')
+        for( i = 0; i <data['carros'].length; i++){
+            console.log(data['carros'][i]['fields']['carro'])
+        }
 
     })
 }

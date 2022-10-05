@@ -61,5 +61,5 @@ def att_cliente(request):
     carros_json = json.loads(serializers.serialize('json', carros))
     carros_json = [ {'fields': carro['fields'], 'id': carro['pk'] } for carro in carros_json]
     data = {'cliente': clientes_json, 'carros': carros_json}
-    print(data)
+    
     return JsonResponse(data)
