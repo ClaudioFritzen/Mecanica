@@ -54,8 +54,24 @@ function dados_cliente(){
 
         // lista dos carros
         div_carros = document.getElementById('carros')
+        div_carros.innerHTML = ""
         for( i = 0; i <data['carros'].length; i++){
-            console.log(data['carros'][i]['fields']['carro'])
+            //console.log(data['carros'][i]['fields']['carro'])
+
+            div_carros.innerHTML += "\
+                <form action='' method=''>\
+                    <div class='row'>\
+                        <div class='col-md'>\
+                            <input class='form-control' type='text' name='carro' value=' " + data['carros'][i]['fields']['carro']+ " ' />\
+                        </div>\
+                        <div class='col-md'>\
+                            <input class='form-control' type='text' name='placa' value=' " + data['carros'][i]['fields']['placa']+ " ' />\
+                        </div>\
+                        <div class='col-md'>\
+                            <input class='form-control' type='text' name='ano' value=' " + data['carros'][i]['fields']['ano']+ " ' />\
+                        </div>\
+                    </div>\
+                </form><br>"
         }
 
     })
