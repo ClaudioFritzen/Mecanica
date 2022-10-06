@@ -59,7 +59,7 @@ function dados_cliente(){
             //console.log(data['carros'][i]['fields']['carro'])
 
             div_carros.innerHTML += "\
-                <form action='' method=''>\
+                <form action='/clientes/update_carro/"+ data['carros'][i]['id']+" ' method='POST'>\
                     <div class='row'>\
                         <div class='col-md'>\
                             <input class='form-control' type='text' name='carro' value=' " + data['carros'][i]['fields']['carro']+ " ' />\
@@ -69,6 +69,9 @@ function dados_cliente(){
                         </div>\
                         <div class='col-md'>\
                             <input class='form-control' type='text' name='ano' value=' " + data['carros'][i]['fields']['ano']+ " ' />\
+                        </div>\
+                        <div class='col-md'>\
+                            <input class='btn btn-success' type='submit' value='salvar' />\
                         </div>\
                     </div>\
                 </form><br>"
