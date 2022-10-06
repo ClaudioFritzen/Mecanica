@@ -73,6 +73,15 @@ def update_carro(request, id):
     ano = request.POST.get('ano')
 
     carro = Carro.objects.get(id=id)
-    print(carro)
+    list_carros = Carro.objects.filter(placa=placa).exclude(id=id)
+    if list_carros.exists():
+        return HttpResponse('Hello World! Carro já existe')
 
-    return HttpResponse('Hello World!')
+    # salvando no banco quando os dados dos carros forem alterados
+
+    carro.carro = nome_carro
+    carro.placa = placa
+    carro.ano = ano 
+    carro.save()
+
+    return HttpResponse('Hello World! Itens alterados com sucesso!')
