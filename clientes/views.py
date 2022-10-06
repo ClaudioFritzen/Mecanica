@@ -9,6 +9,10 @@ import json
 
 from django.views.decorators.csrf import csrf_exempt
 
+# importações para fazer o try de excluir
+from django.urls import reverse
+from django.shortcuts import redirect
+
 # Create your views here.
 def clientes(request):
     if request.method == "GET":
@@ -85,3 +89,12 @@ def update_carro(request, id):
     carro.save()
 
     return HttpResponse('Hello World! Itens alterados com sucesso!')
+
+def excluir_carro(request, id):
+    try:
+        carro = Carro.objects.get(id=id)
+        carro.delete()
+        return redirect(reverse('clientes')+f'?aba=att_cliente&id_cliente={id}')
+    except:
+        #todo exibir mms de erro
+        return redirect(reverse('clientes')+f'?aba=att_cliente&id_cliente={id}')
