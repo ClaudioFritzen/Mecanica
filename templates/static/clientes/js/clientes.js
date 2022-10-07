@@ -40,9 +40,11 @@ function dados_cliente(){
                 
         document.getElementById('form-att-cliente').style.display = 'block'
 
+        id = document.getElementById('id').value = data['cliente_id']
+
         nome = document.getElementById('nome')
         nome.value = data['cliente']['nome']
-
+        
         sobrenome = document.getElementById('sobrenome')
         sobrenome.value = data['cliente']['sobrenome']
 
@@ -83,3 +85,30 @@ function dados_cliente(){
 
     })
 }
+
+function update_cliente(){
+    nome = document.getElementById('nome').value
+    sobrenome = document.getElementById('sobrenome').value
+    email = document.getElementById('email').value
+    cpf = document.getElementById('cpf').value
+    id = document.getElementById('id').value
+
+    fetch('/clientes/update_cliente/'+ id, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrf_token,
+        },
+        body: JSON.stringify({
+            nome: nome,
+            sobrenome: sobrenome,
+            email: email,
+            cpf: cpf
+        })
+    }).then(function(result){
+        return result.json()
+
+    }).then(function(data){
+        console.log(data)
+    })
+}
+

@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # importações para fazer o try de excluir
 from django.urls import reverse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 # Create your views here.
 def clientes(request):
@@ -63,10 +63,12 @@ def att_cliente(request):
     carros = Carro.objects.filter(cliente=cliente[0])
 
     clientes_json = json.loads(serializers.serialize('json', cliente))[0]['fields']
+    cliente_id = json.loads(serializers.serialize('json', cliente))[0]['pk']
+    
     #lista de dados
     carros_json = json.loads(serializers.serialize('json', carros))
     carros_json = [ {'fields': carro['fields'], 'id': carro['pk'] } for carro in carros_json]
-    data = {'cliente': clientes_json, 'carros': carros_json}
+    data = {'cliente': clientes_json, 'carros': carros_json, 'cliente_id': cliente_id}
     
     return JsonResponse(data)
 
@@ -98,3 +100,25 @@ def excluir_carro(request, id):
     except:
         #todo exibir mms de erro
         return redirect(reverse('clientes')+f'?aba=att_cliente&id_cliente={id}')
+
+def update_cliente(request, id):
+    body = json.loads(request.body)
+    nome = body['nome']
+    sobrenome = body['sobrenome']
+    email = body['email']
+    cpf = body['cpf']
+
+
+    cliente = get_object_or_404(Cliente, id=id)
+    
+    try:
+        cliente.nome = nome
+        cliente.sobrenome = sobrenome
+        cliente.email = email
+        cliente.cpf = cpf
+        cliente.save()
+        return JsonResponse({'status': '200', 'nome': nome, 'sobrenome': sobrenome, 'email': email, 'cpf': cpf})
+    except:
+
+        return JsonResponse({'status': 500})
+    

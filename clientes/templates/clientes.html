@@ -36,6 +36,9 @@
                 <br>
                 <p>CPF:</p>
                 <input type="text" class="form-control" placeholder="___.___.___-__" name="cpf" value="{{cpf}}">
+                <br>
+                
+
                 <hr style="background-color:gray;">
                 <div class="add-carros">
                     <h3>Carros</h3>
@@ -80,6 +83,7 @@
             <hr>
 
             <div id="form-att-cliente">
+                <input type="hidden" id="id" />
                 <p> Nome:</p>
                 <input id="nome" type="text" class="form-control" />
                 <p>Sobrenome:</p>
@@ -88,7 +92,8 @@
                 <input id="email" type="email" class="form-control" />
                 <p>CPF:</p>
                 <input id="cpf" type="text" class="form-control" />
-                
+                <br>
+                <input onclick="update_cliente()" class='btn btn-success' type='submit' value='salvar' />
                 <!-- Lista dos carros -->
                <hr style="background-color: gray;">
                 <h3> Carros</h3>
