@@ -108,7 +108,16 @@ function update_cliente(){
         return result.json()
 
     }).then(function(data){
-        console.log(data)
+
+        if(data['status'] == '200'){
+            nome = data['nome']
+            sobrenome = data['sobrenome']
+            email = data['email']
+            cpf = data['cpf']
+            console.log('dados alterados com sucesso!!!!')
+        }else {
+            console.log('Erro interno do sistema!!!')
+        }
     })
 }
 
