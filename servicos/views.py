@@ -2,5 +2,5 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # Create your views here.
-def servicos(request):
-    return HttpResponse('Hello World!')
+def novo_servico(request):
+    return render(request, 'servicos.html')
