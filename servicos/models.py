@@ -1,11 +1,10 @@
-from email.policy import default
-from unittest.util import _MAX_LENGTH
 from django.db import models
 from clientes.models import Cliente
+from servicos.choices import ChoicesCcategoriaManuntencao
 
 # Create your models here.
 class Servico(models.Model):
-    titulo = models.CharField(_MAX_LENGTH=30)
+    titulo = models.CharField(max_length=30)
     cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null = True)
 
     data_inicio = models.DateField(null=True)
@@ -14,3 +13,10 @@ class Servico(models.Model):
 
     #protocolo de serviço
     protocolo = models.CharField(max_length=32, null=True, blank=True)
+
+class CategoriaManutencao(models.Model):
+    titulo = models.CharField(max_length=3, choices=ChoicesCcategoriaManuntencao.choices)
+    preco = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def __str__(self) -> str:
+        return self.titulo
