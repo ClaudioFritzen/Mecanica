@@ -1,3 +1,4 @@
+from asyncio import constants
 import re
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, JsonResponse
@@ -11,6 +12,10 @@ from django.views.decorators.csrf import csrf_exempt
 # importações para fazer o try de excluir
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
+
+# imports para mensagens personalizadas
+from django.contrib.messages import constants
+from django.contrib import messages
 
 # Create your views here.
 def clientes(request):
@@ -33,7 +38,8 @@ def clientes(request):
 
         # se tiver faz
         if cliente.exists():
-           return render(request, 'clientes.html', {'nome': nome, 'sobrenome': sobrenome, 'email': email, 'carros': zip(carros, placas, anos)})
+            messages.add_message(request, constants.ERROR, 'CPF já existente')
+            return render(request, 'clientes.html', {'nome': nome, 'sobrenome': sobrenome, 'email': email, 'carros': zip(carros, placas, anos)})
            
 
         # validação do email
