@@ -7,15 +7,7 @@
 
 {% block 'dashboard' %}
     <div class="container">
-        <div class="mensagens_perso">
-            {% if messages %}
-                <br>
-                {% for message in messages %}
-                    <div class="alert {{message.tags}}"
-                        {{message}}
-                {% endfor %}
-            {% endif %}
-        </div>
+        
         <div class="row">
 
             <div onclick="exibir_form('1')" class="col-md card-dashboard">
@@ -28,6 +20,17 @@
 
         </div>
         <div id="adicionar-cliente" class="adicionar-cliente">
+            <div class="mensagens_perso">
+                {% if messages %}
+                    <br>
+                    {% for message in messages %}
+                        <div class="alert {{message.tags}}">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
             <form action="{% url 'clientes' %}" method="POST"> {% csrf_token %}
                 <div class="row">
                     <div class="col-md">

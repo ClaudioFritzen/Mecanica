@@ -42,5 +42,9 @@
 }
 
 .mensagens_perso{
-    display:block;
+    margin-top: 8%;
+    margin-left: 15%;
+    width: 30%;  
+    text-align: center;
+    background-color: var(--dark-color)
 }
