@@ -1,6 +1,10 @@
+from secrets import token_hex
 from django.db import models
 from clientes.models import Cliente
 from .choices import ChoicesCategoriaManuntencao
+
+# import para pegar a data atual
+from datetime import datetime
 
 
 # Create your models here.
@@ -19,7 +23,15 @@ class Servico(models.Model):
     data_inicio = models.DateField(null=True)
     date_entrega = models.DateField(null=True)
     finalizado = models.BooleanField(default=True)
-
+    
     #protocolo de serviço
-    protocolo = models.CharField(max_length=32, null=True, blank=True)
+    protocolo = models.CharField(max_length=52, null=True, blank=True)
 
+    def __str__(self) -> str:
+        return self.titulo
+
+    def save(self, *args, **kwargs):
+        if not self.protocolo:
+            self.protocolo = datetime.now().strftime("%d/%m/%Y-%H:%M:%S-") + token_hex(16)
+            
+        super(Servico, self).save(*args, **kwargs)
