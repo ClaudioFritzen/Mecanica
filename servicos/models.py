@@ -35,3 +35,9 @@ class Servico(models.Model):
             self.protocolo = datetime.now().strftime("%d/%m/%Y-%H:%M:%S-") + token_hex(16)
             
         super(Servico, self).save(*args, **kwargs)
+    
+    def preco_total(self):
+        preco_total = float(0)
+        for categoria in self.categoria_manutencao.all():
+            preco_total += float(categoria.preco)
+        return preco_total
