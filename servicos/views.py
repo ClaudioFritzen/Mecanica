@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+# 
+from .forms import FormServico
+
 # Create your views here.
 def novo_servico(request):
-    return render(request, 'servicos.html')
+    form = FormServico()
+    return render(request, 'novo_servico.html', {'form': form})

@@ -8,7 +8,7 @@ class FormServico(ModelForm):
         # fields = '__all__'
 
         #trazendo só os escolhidos
-        fields = ['titulo', 'cliente']
+       # fields = ['titulo', 'cliente']
 
         # "exclude" exclui os campos que quiser nesse caso
         # serão os campos que o usuário não tera
