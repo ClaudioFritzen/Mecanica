@@ -32,5 +32,9 @@ class FormServico(ModelForm):
         """
         for fields in self.fields:
             self.fields[fields].widget.attrs.update({'class': 'form-control'})
+            self.fields[fields].widget.attrs.update({'placeholder': fields})
+
+        for i, j in self.fields['categoria_manutencao'].choices:
+            print(i,j)
         
 
