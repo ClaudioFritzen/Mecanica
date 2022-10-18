@@ -34,9 +34,11 @@ class FormServico(ModelForm):
             self.fields[fields].widget.attrs.update({'class': 'form-control'})
             self.fields[fields].widget.attrs.update({'placeholder': fields})
 
+        choices = list()
         for i, j in self.fields['categoria_manutencao'].choices:
             categoria = CategoriaManutencao.objects.get(titulo=j) 
-
-            print(categoria.get_titulo_display())
+            choices.append((i.value, categoria.get_titulo_display()))
+        
+        self.fields['categoria_manutencao'].choices = choices
         
 
