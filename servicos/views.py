@@ -6,9 +6,11 @@ from .forms import FormServico
 
 # Create your views here.
 def novo_servico(request):
+    #return HttpResponse('Hello World!')
+       
     if request.method == "GET":
         form = FormServico()
-        return render(request, 'novo_servico.html', {'form': form})
+        return render(request, 'novo_servico.html', {'form': form}) 
     elif request.method == "POST":
         form = FormServico(request.POST)
 
@@ -18,3 +20,4 @@ def novo_servico(request):
 
         else:
             return render(request, 'novo_servico.html', {'form': form})
+     
