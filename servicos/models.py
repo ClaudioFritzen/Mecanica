@@ -17,7 +17,7 @@ class CategoriaManutencao(models.Model):
 
 
 class Servico(models.Model):
-    titulo = models.CharField(max_length=30)
+    titulo = models.CharField(max_length=70)
     cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True)
     categoria_manutencao = models.ManyToManyField(CategoriaManutencao)
     data_inicio = models.DateField(null=True)
