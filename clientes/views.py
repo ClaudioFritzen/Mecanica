@@ -1,4 +1,3 @@
-from asyncio import constants
 import re
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, JsonResponse
@@ -35,7 +34,7 @@ def clientes(request):
         # fazendo a validação do cpf
         # buscando no banco se existe o cpf em todos os clientes no db
         cliente = Cliente.objects.filter(cpf=cpf)
-
+        print(nome, sobrenome,email, cpf)
         # se tiver faz
         if cliente.exists():
             messages.add_message(request, constants.ERROR, 'CPF já existente')
@@ -44,9 +43,9 @@ def clientes(request):
         email = Cliente.objects.filter(email=email)
         messages.add_message(request, constants.ERROR, 'Email já existente')
         # validação do email
-        if not re.fullmatch(re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'), email):
-            messages.add_message(request, constants.ERROR, 'Email inválido!')
-            return render(request, {'nome': nome, 'sobrenome': sobrenome, 'cpf': cpf, 'carros': zip(carros, placas, ano)})
+        #if not re.fullmatch(re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'), email):
+         #   messages.add_message(request, constants.ERROR, 'Email inválido!')
+        return render(request,'clientes.html', {'nome': nome, 'sobrenome': sobrenome, 'cpf': cpf, 'carros': zip(carros, placas, anos)})
            
 
 
