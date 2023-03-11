@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'clientes/css/clientes.css' %}">
+{% endblock 'head' %}
+
+
+{% block 'title' %}
+    Serviços
+{% endblock 'title' %}
+
+{% block 'dashboard' %}
+    <br><br>
+    <div class="container">
+        <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Protocolo</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Status</th>
+                <th scope="col">Preço Total </th>
+              </tr>
+            </thead>
+
+           <!-- # listando os dados dinamicamente -->
+            <tbody>
+                {% for servico in servicos %}
+                    <tr>
+                        <th>{{servico.protocolo}}</th>
+                        <td>{{servico.titulo}}</td>
+                        <td>{{servico.cliente}}</td>
+                        <td>{{servico.finalizado}}</td>
+                    </tr>
+                {% endfor %}
+              
+            </tbody>
+          </table>
+    </div>
+{% endblock  %}

@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
+# 
+from .models import Servico, Cliente
+
 # 
 from .forms import FormServico
 
@@ -21,3 +25,9 @@ def novo_servico(request):
         else:
             return render(request, 'novo_servico.html', {'form': form})
      
+
+# aula 7
+def listar_servico(request):
+    if request.method == "GET":
+        servico = Servico.objects.all()
+        return render(request, 'listar_servico.html', {'servico': servico})
